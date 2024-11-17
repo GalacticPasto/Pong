@@ -1,6 +1,11 @@
 @echo off
-mkdir ..\build
-pushd ..\build
-cl /std:clatest ..\src\Pong.c gdi32.lib kernel32.lib msvcrt.lib opengl32.lib raylib.lib shell32.lib user32.lib winmm.lib  -Ic:\raylib\raylib\out\build\x64-Debug\raylib\include /link /libpath:c:\raylib\raylib\out\build\x64-Debug\raylib\ 
-popd
+mkdir build
+set compilerflags= -FAsc -Zi /std:clatest
+set includeflags=-I"D:\Projects\raylib-5.0_win64_msvc16\include" 
+::                  set ^^^^^^^^^ this to your raylib include folder path 
+set linkerflags= gdi32.lib msvcrt.lib winmm.lib opengl32.lib shell32.lib raylib.lib user32.lib   /link /libpath:"D:\Projects\raylib-5.0_win64_msvc16\lib" /NODEFAULTLIB:libcmt
+::                                                                                                          set      ^^^^ this to your raylib lib folder
+pushd build
+cl ..\src\Pong.c %compilerflags% %includeflags% %linkerflags%
+popd 
 
